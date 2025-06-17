@@ -1,3 +1,21 @@
-[gd_scene format=3 uid="uid://cjlqwbdydube3"]
+[gd_scene load_steps=4 format=3 uid="uid://cjlqwbdydube3"]
+
+[ext_resource type="PackedScene" uid="uid://sp1rpaqvacs0" path="res://Space_co-op_game/Scenes/player.tscn" id="1_5n8sr"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_5n8sr"]
+size = Vector2(20, 20)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_5n8sr"]
+data = PackedVector3Array(10, 0, 10, -10, 0, 10, 10, 0, -10, -10, 0, 10, -10, 0, -10, 10, 0, -10)
 
 [node name="Main" type="Node3D"]
+
+[node name="Player" parent="." instance=ExtResource("1_5n8sr")]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("PlaneMesh_5n8sr")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_5n8sr")

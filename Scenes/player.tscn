@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://sp1rpaqvacs0"]
+
+[ext_resource type="Script" uid="uid://bn0747h6ux46d" path="res://Space_co-op_game/scripts/player.gd" id="1_j8nyd"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_2fpog"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_j8nyd"]
+
+[node name="Player" type="CharacterBody3D"]
+script = ExtResource("1_j8nyd")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("CapsuleMesh_2fpog")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_j8nyd")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
