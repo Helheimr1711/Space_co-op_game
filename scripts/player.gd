@@ -5,7 +5,7 @@ extends CharacterBody3D
 ## Movement
 # Speed variables
 var SPEED := 5.0
-const WALKING_SPEED := 8.0
+const WALKING_SPEED := 9.0
 const SPRINT_SPEED := 12.0
 const BACKWARDS_SPEED := 5.0
 const JUMP_VELOCITY := 4.5
@@ -15,14 +15,15 @@ var direction := Vector3.ZERO
 # Lerp speed for smooth movement
 var lerp_speed := 10
 # Stamina variables, not final numbers!
-var stamina_max := 50
-var stamina := 50
-var jump_stamina_consumption := 11
-var sprinting_stamina_consumption := 2
+var stamina_max := 100.
+var stamina := 100.
+var jump_stamina_consumption := 11.
+var sprinting_stamina_consumption := 0.5
 var stamina_wait_time := 2.
 var stamina_cooldown := 0.
 
 var mouse_sens := 0.25
+var jumping_mouse_sens := 0.05
 
 
 func _ready() -> void:
@@ -31,9 +32,16 @@ func _ready() -> void:
 # Looking and setting direction by mouse.
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
-		rotate_y(deg_to_rad(-event.relative.x * mouse_sens))
-		camera.rotate_x(deg_to_rad(-event.relative.y * mouse_sens))
-		camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-89), deg_to_rad(89))
+		# Normal sensitivity when is player on floor.
+		if is_on_floor():
+			rotate_y(deg_to_rad(-event.relative.x * mouse_sens))
+			camera.rotate_x(deg_to_rad(-event.relative.y * mouse_sens))
+			camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-89), deg_to_rad(89))
+		# Slower sensitivity when is player in air.
+		else:
+			rotate_y(deg_to_rad(-event.relative.x * jumping_mouse_sens))
+			camera.rotate_x(deg_to_rad(-event.relative.y * jumping_mouse_sens))
+			camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-89), deg_to_rad(89))
 
 ## Stamina functions
 func use_stamina(stamina_decrease) -> void:
