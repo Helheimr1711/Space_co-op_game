@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://sp1rpaqvacs0"]
+
+[ext_resource type="Script" uid="uid://bn0747h6ux46d" path="res://Space_co-op_game/scripts/player.gd" id="1_j8nyd"]
+[ext_resource type="Script" uid="uid://yy7o5crwsih7" path="res://Space_co-op_game/scripts/raycast.gd" id="2_dy545"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_2fpog"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_j8nyd"]
+
+[node name="Player" type="CharacterBody3D"]
+script = ExtResource("1_j8nyd")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("CapsuleMesh_2fpog")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_j8nyd")
+
+[node name="Neck" type="Node3D" parent="."]
+
+[node name="eyes" type="Node3D" parent="Neck"]
+
+[node name="Camera3D" type="Camera3D" parent="Neck/eyes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+
+[node name="RayCast3D" type="RayCast3D" parent="Neck/eyes/Camera3D"]
+target_position = Vector3(0, 0, -5)
+debug_shape_custom_color = Color(1, 0, 0, 1)
+script = ExtResource("2_dy545")
