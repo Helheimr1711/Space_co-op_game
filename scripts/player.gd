@@ -1,7 +1,8 @@
 extends CharacterBody3D
 
-@onready var camera = $eyes/Camera3D
-@onready var eyes = $eyes
+@onready var camera = $Neck/eyes/Camera3D
+@onready var eyes = $Neck/eyes
+@onready var neck = $Neck
 
 ## Movement
 # Speed variables
@@ -13,8 +14,10 @@ const JUMP_VELOCITY := 4.5
 
 # Direction global variable
 var direction := Vector3.ZERO
+
 # Lerp speed for smooth movement
 var lerp_speed := 10
+
 # Stamina variables, not final numbers!
 var stamina_max := 100.
 var stamina := 100.
@@ -22,9 +25,11 @@ var jump_stamina_consumption := 11.
 var sprinting_stamina_consumption := 0.5
 var stamina_wait_time := 2.
 var stamina_cooldown := 0.
+
 # Mouse sensitivies
 var mouse_sens := 0.25
 var jumping_mouse_sens := 0.05
+
 ## Headbobbing
 # Values
 const headbobbing_values := {"Intensity" : {"walking" : 0.1, "sprinting" : 0.2, "none" : 0.0},
@@ -33,6 +38,8 @@ const headbobbing_values := {"Intensity" : {"walking" : 0.1, "sprinting" : 0.2, 
 var headbobbing_vector := Vector2.ZERO
 var headbobbing_index := 0.0
 var headbobbing_current_intensity := 0.0
+
+
 
 
 func _ready() -> void:
@@ -88,10 +95,10 @@ func _physics_process(delta: float) -> void:
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 
+	## Stamina
 	# Stamina cooldown lowering.
 	if stamina_cooldown > 0.:
 		stamina_cooldown -= delta
-
 	# Stamina regenerating
 	if stamina_cooldown <= 0.:
 		regenerate_stamina()
@@ -121,7 +128,7 @@ func _physics_process(delta: float) -> void:
 			else:
 				SPEED = WALKING_SPEED
 	# Checking if player is moving backwards while sprinting, then setting correct speed.
-	elif Input.is_action_just_pressed("move_sprint") and Input.is_action_pressed("move_backward"):
+	elif Input.is_action_pressed("move_sprint") and Input.is_action_pressed("move_backward"):
 		SPEED = BACKWARDS_SPEED
 	# Basic speed
 	else:
@@ -141,4 +148,3 @@ func _physics_process(delta: float) -> void:
 			headbobbing(delta, "none")
 
 	move_and_slide()
-	print(direction)
