@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://cacistd5no80w"]
+
+[ext_resource type="Script" uid="uid://bwj37hqel2bb" path="res://Space_co-op_game/inventory-system/scripts/item.gd" id="1_08msj"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_08msj"]
+
+[node name="Item" type="Node3D"]
+script = ExtResource("1_08msj")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("BoxShape3D_08msj")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
