@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://cjlqwbdydube3"]
+[gd_scene load_steps=6 format=3 uid="uid://cjlqwbdydube3"]
 
 [ext_resource type="PackedScene" uid="uid://sp1rpaqvacs0" path="res://Space_co-op_game/scenes/player.tscn" id="1_5n8sr"]
+[ext_resource type="PackedScene" uid="uid://cacistd5no80w" path="res://Space_co-op_game/inventory-system/scenes/item.tscn" id="2_jtffq"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_5n8sr"]
 size = Vector2(20, 20)
@@ -26,3 +27,6 @@ shape = SubResource("ConcavePolygonShape3D_5n8sr")
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.18882, 1.69392, 0)
 mesh = SubResource("BoxMesh_5n8sr")
+
+[node name="Item" parent="." instance=ExtResource("2_jtffq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.30662, 1.66838, 0)

@@ -6,6 +6,7 @@
 
 [node name="Item" type="Node3D"]
 script = ExtResource("1_08msj")
+item_template = "pistol"
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
 
