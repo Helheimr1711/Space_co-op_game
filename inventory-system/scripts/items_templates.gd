@@ -11,7 +11,7 @@ const items_templates = {
 		"name" : "Pistol",
 		"desc" : "Good pistol for shooting.",
 		"item_type" : item_type.Weapon,
-		"mag_size" : 8,
+		"number" : 500,
 		"automatic" : false,
 	},
 	"medkit" : {
@@ -19,13 +19,13 @@ const items_templates = {
 		"name" : "Med-Kit",
 		"desc" : "Cool medkit",
 		"item_type" : item_type.Consumable,
-		"health" : 25,
+		"number" : 25,
 	},
 	"ammo" : {
 		"id" : 2,
 		"name" : "Ammunition",
 		"desc" : "Universal ammunition for all weapons.",
 		"item_type" : item_type.Ammunition,
-		"size" : 30,
+		"number" : 30,
 	},
 }

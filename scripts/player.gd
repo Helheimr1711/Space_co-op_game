@@ -3,6 +3,7 @@ extends CharacterBody3D
 @onready var camera = $Neck/eyes/Camera3D
 @onready var eyes = $Neck/eyes
 @onready var neck = $Neck
+@onready var interaction_ray = $Neck/eyes/InteractionRay
 
 ## Movement
 # Speed variables
@@ -148,3 +149,11 @@ func _physics_process(delta: float) -> void:
 			headbobbing(delta, "none")
 
 	move_and_slide()
+	
+	
+	## Interaction script
+	if interaction_ray.is_colliding():
+		var colliding_body = interaction_ray.get_collider()
+		var colliding_obj = colliding_body.get_parent()
+		print(colliding_obj.item_id)
+		
